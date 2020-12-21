@@ -11,7 +11,7 @@
 	<groupId>io.barsha</groupId>
 	<artifactId>testBarsha</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>testBarsha</name>
 	<description>Spring Boot Project Test Barsha - Data Layer</description>
 
@@ -63,11 +63,38 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.16</version>
+		</dependency>
 		
 	</dependencies>
 
 	<build>
 		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<directory>/static</directory>
+							<targetPath>/WEB-INF/classes/static</targetPath>
+							<filtering>false</filtering>
+						</resource>
+					</webResources>
+					<archive>
+						<manifest>
+
+							<!-- give full qualified name of your main class-->
+							<mainClass>io.barsha.TestBarshaApplication</mainClass>
+
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
